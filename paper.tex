@@ -1,0 +1,526 @@
+%    Copyright (c)  2024  João Augusto Costa Branco Marado Torres.
+%    Permission is granted to copy, distribute and/or modify this document
+%    under the terms of the GNU Free Documentation License, Version 1.3
+%    or any later version published by the Free Software Foundation;
+%    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%    A copy of the license is included in the section entitled "GNU
+%    Free Documentation License".
+%
+%    You should have received a copy of the GNU Free Documentation License
+%    along with this program.  If not, see <https://www.gnu.org/licenses/>
+%
+%    <https://github.com/Marado-Programmer/alganalysis>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{bm}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\selectlanguage{english}
+\usepackage{blindtext}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\hypersetup{colorlinks,
+           %citecolor=black,
+           %filecolor=black,
+           %linkcolor=black,
+           %urlcolor=black,
+           bookmarksopen=true}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt,
+defernumbers=true
+]{biblatex}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\addbibresource{references.bib}
+\usepackage{bookmark}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\copyrightnotice}
+\setlength{\headheight}{14.5pt}
+%\addtolength{\topmargin}{-2.5pt}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,calc}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{gnuplot-lua-tikz}
+\usepackage{listings}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+\pagenumbering{arabic}
+\hfuzz = .6pt % avoid black boxes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\copyrightnotice}{
+    Copyright \copyright{}  2024  João Augusto Costa Branco Marado Torres.
+}
+\newcommand{\licensenotice}{
+    \copyrightnotice
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled ``GNU
+    Free Documentation License''.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Analysis of Algorithms}
+\author{João Augusto Costa Branco Marado Torres}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{*}
+
+\begin{document}
+    \maketitle
+
+    \begin{abstract}
+        This will be a summary the basics that you can find in \citetitle{algs}
+        \cite{algs} and \citetitle{designanalysis} \cite{designanalysis} plus
+        some of the things shown during classes.
+
+        The source code for this paper is available at: \\
+        \url{https://github.com/Marado-Programmer/alganalysis} \cite{repo}
+    \end{abstract}
+
+    \section*{License}
+
+    \bigskip
+    \begin{quote}
+        \licensenotice
+    \end{quote}
+    \bigskip
+
+    \tableofcontents
+
+    % \listoffigures
+    % \listoftables
+    \lstlistoflistings
+    \clearpage
+
+    \section{Introduction}
+
+    Analysis of Algorithms is the study of how algorithms perform based on
+    efficiency and resource consumption.
+
+    \section{Algorithms}
+
+    An algorithm is a group of instructions for something (human or machine) to
+    do by receiving a set of values (the input) and returning a set of values
+    (the output). Those instructions are unambiguous and are abstract in a way
+    that it can be implemented using any programming language, and if the
+    machine permits it.
+
+    Like a recipe, any person can follow the recipe (even if they do some steps
+    in different ways), but the kitchen needs to have all the resources
+    (furniture, ingredients) to be able to complete the recipe.
+
+    An algorithm solves a problem, and that problem can be solved in various
+    ways by different algorithms. Some will fit better than others and that can
+    depend on a lot of things. You want to find the best algorithm for your
+    needs.
+
+    Algorithms often work alongside with {data
+    structures}~\ref{sec:data_structures}.
+
+    Some other things you can take into account when creating an algorithm is
+    about \textbf{finiteness}, \textbf{effectiveness} and \textbf{generality}.
+
+    \subsection{Analysis and Design}
+
+    An algorithm can be analyzed using its time complexity.
+
+    The time complexity is the amount of time an algorithm takes to complete,
+    given an input of size \texttt{N} using asymptotic notation such as Big $ O
+    $ notation that shows how time grows with the input size.
+
+    Time complexity can be analyzed in terms of:
+    \begin{itemize}
+        \item worst case scenario -- maximum time it can take, maximum steps on input of size \texttt{N};
+        \item average case scenario -- expected time it can take over typical inputs, average steps on input of size \texttt{N};
+        \item best case scenario -- minimum time it can take, minimum steps on input of size \texttt{N}.
+    \end{itemize}
+
+    The space complexity is the amount of memory an algorithm takes to
+    complete, given an input of size \texttt{N}. Helps understand storage
+    requirements when working with big data or memory limited environments.
+
+    Algorithm analysis finds the most efficient time/space complexity solution
+    for a given problem for a specific situation.
+
+    There will always be various ways to solve a problem. But only a few of
+    them will have the characteristics, performance and time complexity and
+    space complexity efficiency that fits your needs. So you need to learn the
+    best, average and worst case of the algorithm and the algorithm behavior as
+    the input gets larger (asymptotic notation, unbounded behavior).
+
+    Inefficient algorithms can use unnecessary computing power or storage which
+    costs time. A problem for some places when time is precious.
+
+    We always estimate the complexity of an algorithm in an asymptotic sense
+    (for an arbitrarily large input), when the input size approaches infinity.
+
+    This is the determination of the amount of time and space resources
+    required to execute the algorithm.
+
+    One way to measure the amount of time is to know which instructions from a
+    certain ISA will execute and how many instructions of each will be
+    executed. Then by knowing each CPI for every instruction, calculate the
+    total of cycles of your program will have and then divide the number of
+    cycles by the CPU frequency. Some ISA can have instructions that other
+    don't and need to be implemented based on more basic instructions which can
+    take up more CPU cycles.
+
+    We can also count how much memory it's used by
+    all instructions to have our space complexity.
+
+    We also need to take into the account the \textbf{input size} here which
+    can vary depending on the problem. For searching or sorting a list, it can
+    be the number of elements in a list, for multiplication of two numbers it
+    can be the total number of bits to represent both inputs, for
+    graphs it can be the number of edges and vertices in it.
+
+    The \textbf{running time} is the number of ``steps'' executed by the
+    algorithm. For simplicity normally we treat every operation as constant
+    time ($ 1 $ ``step'') except loops.
+
+    But what really is important it's to know the order/rate of grow of the
+    running time. We want to know what the running time will be as the input
+    size approaches $ \infty $, where the leading term of the running time will
+    be the only one that we care.
+
+    Asymptotic Notation\ref{sec:asymptotic} it's often used for this.
+
+    \subsection{Stages of algorithm analysis}
+
+    \subsubsection{\textit{A Priori}}
+
+    This happens before implementation. Assuming that factors external to the
+    algorithm logic such as processor speed, memory read and writes, compiler
+    optimizations, etc..., have no effect.
+
+    If you want to distribute a product you should rely on this since you don't
+    know the user machine.
+
+    \subsubsection{\textit{A Posterior}}
+
+    After implementation by measuring the actual running time and space
+    required of an implementation on a machine (benchmark).
+
+    \subsection{Main factors of the efficiency of an algorithm}
+
+    \begin{itemize}
+        \item Time factor -- number of key operations;
+        \item Space factor -- maximum memory space required.
+    \end{itemize}
+
+    \subsection{Asymptotic Notation}\label{sec:asymptotic}
+
+    Measure efficiency that does not depend on the machine.
+
+    Being $ f \left( n \right) $ and $ g \left( n \right) $ two running time
+    functions for an input size of n.
+
+    \subsubsection{Upper bound of a function}
+
+    Represents the worst case scenario.
+
+    \begin{definition}[Big $ O $]
+        \begin{displaymath}
+            \exists c, n_{0} \in \mathbb{R}^{+}: \forall n \ge n_{0}, f \left( n \right) \le c g \left( n \right) \implies f \left( n \right) = O \left( g \left( n \right) \right)
+        \end{displaymath}
+        \label{eq:big_oh}
+    \end{definition}
+
+    \subsubsection{Lower bound of a function}
+
+    Represents the best case scenario.
+
+    \begin{definition}[Big $ \Omega $]
+        \begin{displaymath}
+            \exists c, n_{0} \in \mathbb{R}^{+}: \forall n \ge n_{0}, f \left( n \right) \ge c g \left( n \right) \implies f \left( n \right) = \Omega \left( g \left( n \right) \right)
+        \end{displaymath}
+        \label{eq:big_omega}
+    \end{definition}
+
+    \subsubsection{Average bound of a function}
+
+    Represents the average case scenario.
+
+    \begin{definition}[Big $ \Theta $]
+        \begin{displaymath}
+            \begin{split}
+                & \exists c_{1}, c_{2}, n_{0} \in \mathbb{R}^{+}: \forall n \ge n_{0}, c_{1} g \left( n \right) \le f \left( n \right) \le c_{2} g \left( n \right) \implies \\
+                & \implies f \left( n \right) = \Theta \left( g \left( n \right) \right)
+            \end{split}
+        \end{displaymath}
+        \label{eq:big_theta}
+    \end{definition}
+
+    \subsection{Time/Space tradeoff}
+
+    You can not have both. For example, the factorial:
+
+    $$
+        0! = 1
+    $$
+
+    $$
+        x! = x(x-1)!
+    $$
+
+    To calculate the factorial of a number, you can calculate it recursively
+    every time which is slower than preprocess the result for some inputs and
+    store them for when needed that depending on the data structure used to
+    store those preprocessed values, will be faster, but it uses more storage.
+
+    \subsection{Design Strategies}
+
+    \subsubsection{Brute Force}
+
+    It's the most straightforward approach to solving a problem.
+
+    If you want to calculate $ x^{6} $ you can calculate it as it is defined: $
+    x \times x \times x \times x \times x \times x $. That would be the brute
+    force approach. But you can think of it as $ x^{3} \times x^{3} $, where
+    now you can calculate $ x^{3} $ one time and then multiply it by itself.
+    But that's not the straightforward approach, so it's not considered brute
+    force.
+
+    \subsubsection{Decrease and Conquer}
+
+    \begin{enumerate}
+        \item \textbf{Decrease} the problem into sub problems which the result
+            has relationship with the final result;
+
+        \item \textbf{Conquer} by keeping on dividing until a solution is
+            found;
+
+        \item \textbf{Accumulate/Increment} the sub problems solution into the
+            actual final solution.
+    \end{enumerate}
+
+    \subsubsection{Divide and Conquer}
+
+    \begin{enumerate}
+        \item \textbf{Divide} the problem into sub problems;
+
+        \item \textbf{Conquer} by keeping on dividing until a solution is
+            found;
+
+        \item \textbf{Combine} the sub problems solution into the actual final
+            solution.
+    \end{enumerate}
+
+    The main pros of applying this design strategy is that it supports
+    parallelism. But you need to be careful with the implementation in case of
+    recursion (probably will be the case). If tail call optimization isn't
+    used, you might have problems with stack overflow.
+
+    \subsubsection{Transform and Conquer}
+
+    Here the goal is to transform the input into a simpler representation, or
+    just a simpler one. Then we resolve the problem with the transformed input
+    or use an algorithm already existent for the transformed input.
+
+    \subsubsection{Dynamic Programming}
+
+    It's more like a technique for solving problems with overlapping
+    sub problems that rather than solving them again and again, you compute
+    them only once by using storage
+
+    \subsubsection{Greedy Technique}
+
+    It's a way of constructing the solution little by little. Each step towards
+    the solution needs to be locally optimal, so between all possible steps
+    that you can take, there will be one that is better than the others. Also,
+    each step is irrevocable, once made you can not come back, but if you
+    already took the optimal step, there will be no reason to come back.
+
+    For some algorithms, a sequence of the locally optimal steps might not give
+    the optimal solution.
+
+    % \section{Data Structures}\label{sec:data_structures}
+
+    % \subsection{Graphs}\label{sec:graphs}
+
+    \section{Analyzing my algorithm}
+
+    Since 2021 I've been doing the Advent of Code\cite{aoc}, first 2 years I
+    did it on the JavaScript console in the browser with the input page opened
+    while in lab classes. Last year and this year I'm using it as a way to
+    learn new programming languages, and I leave my solutions on GitHub
+    \cite{aocsols}.
+
+    Let's analyze my solution for
+    \href{https://adventofcode.com/2024/day/5}{part 1 of day 5}.
+
+    \begin{lstlisting}[language=erlang, caption={solution for day 5, part 1 of the Advent of Code 2024}]
+-module(day_05_impl).
+
+-export([part_1/1]).
+
+-spec part_1(string()) -> integer().
+part_1(In) ->
+    {Rules, Lists} = get_parts(In),
+    Sort = create_sort_from_rules(Rules),
+    Filtered = lists:filter(
+        fun(X) -> X =:= lists:sort(Sort, X) end,
+        Lists
+    ),
+    sum_middles(Filtered).
+
+get_parts(In) ->
+    [Rules, Lists] =
+        lists:map(
+            fun(X) -> string:split(X, "\n", all) end,
+            [X || X <- string:split(In, "\n\n", all),
+                  string:length(X) > 0]
+        ),
+    {lists:map(
+        fun(X) ->
+            [First, Last] = string:split(X, "|", all),
+            {First, Last}
+        end,
+        Rules
+    ), lists:map(
+        fun(X) -> string:split(X, ",", all) end,
+        Lists
+    )}.
+
+sum_middles(Lists) ->
+    Middles = lists:map(
+        fun(X) -> lists:nth(
+            (list_length(X) + 1) div 2,
+            X
+        ) end,
+        Lists
+    ),
+    lists:sum(lists:map(
+        fun(X) -> binary_to_integer(X) end,
+        Middles
+    )).
+
+create_sort_from_rules(Rules) ->
+    fun(X, Y) -> not lists:any(
+        fun(Z) -> Z == {Y, X} end,
+        Rules
+    ) end.
+
+list_length(List) ->
+    list_length(List, 0).
+
+list_length([_ | T], Acc) ->
+    list_length(T, Acc + 1);
+list_length([], Acc) ->
+    Acc.
+    \end{lstlisting}
+
+    It receives the input string, and it parses it to extract its rules and
+    lists.
+
+    Let's pretend the separated rules and lists are already given. So we have
+    as an input a list of pairs of tokens (these tokens are string of numbers
+    that are not parsed as numbers because they do not need to), those are the
+    rules, and a list of lists of numbers.
+
+    In this case, a
+    \href{https://www.erlang.org/docs/23/reference_manual/data_types#list}{list
+    is a singly-linked list}. It's one of the basic structures provided by
+    Erlang, the other being tuples and maps, but the language also has bit
+    strings/binaries, strings and records.
+
+    So first we create the predicate for a sort function, which takes constant
+    time $ O \left( 1 \right) $. The execution of that predicate however will
+    take $ O \left( n \right) $ as it uses
+    \href{https://github.com/erlang/otp/blob/master/lib/stdlib/src/lists.erl#L2039}{lists:any}
+
+    Now we filter from the list of lists those how are already sorted. The
+    \href{https://github.com/erlang/otp/blob/master/lib/stdlib/src/lists.erl#L1652}{implementation
+    of lists:sort} is some time of divide and conquer algorithm that I am not
+    sure if it is mergesort but let's assume it is, so time complexity $ O
+    \left( n \log \left( n \right) \right) $. The filtering itself has for sure
+    time complexity $ O \left( n \right) $. The comparing of the list with the
+    operator \texttt{ =:= } is possibly $ O \left( n \right) $ too as it is
+    comparing each element of both lists one by one.
+
+    So to create the variable \textbf{Filtered} has runtime function of
+
+    \begin{equation}
+        \begin{split}
+            f(n, m) & = n ( n + ( n \log ( n ) ) ( m ) ) = \\
+            & = n ( n + n \log ( n ) m ) = \\
+            & = n^{2} + n^{2} \log ( n ) m = \\
+            & = O ( n^{2} \log ( n ) m
+        \end{split}
+    \end{equation}
+
+    Where n is the amount of lists and m the amount of rules.
+
+    \clearpage
+
+    \printbibliography[
+    heading=bibintoc,
+    category=cited
+    ]
+
+    \printbibliography[
+    heading=bibintoc,
+    notcategory=cited,
+    title={Other Resources}
+    ]
+\end{document}

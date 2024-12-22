@@ -1,0 +1,23 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Analysis of Algorithms
+message: A summary on analysis of algorithms,
+type: software
+authors:
+  - given-names: João Augusto
+    family-names: Costa Branco Marado Torres
+    email: torres.dev@disroot.org
+repository-code: 'https://github.com/Marado-Programmer/alganalysis'
+url: 'https://github.com/Marado-Programmer/alganalysis'
+abstract: >-
+  The project repository is available at:
+  <https://github.com/Marado-Programmer/alganalysis>
+keywords:
+  - Analysis of Algorithms
+  - Algorithms
+  - Data Structures
+  - Computer Science
+license: GFDL-1.3-or-later
+date-released: '2024-12-22'
